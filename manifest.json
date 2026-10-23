@@ -1,0 +1,55 @@
+{
+  "id": "hermes-agent",
+  "name": "Hermes Agent",
+  "version": "0.1.0",
+  "description": "Agnx 外置子应用：NousResearch/hermes-agent 整仓 + hermes serve sidecar + desktop renderer（G6 待平台）",
+  "engines": {
+    "agnx": ">=1.0.0"
+  },
+  "main": "./.agnx/dist/index.js",
+  "icon": "./apps/desktop/assets/icon.png",
+  "sidecar": {
+    "supervised": true,
+    "ensureTool": ".agnx/tools/ensure-hermes-serve.mjs",
+    "stateFile": "hermes-gateway.json",
+    "defaultPort": 9119
+  },
+  "runtime": {
+    "sidecars": [
+      {
+        "id": "gateway",
+        "ensureTool": ".agnx/tools/ensure-hermes-serve.mjs",
+        "stateFile": "hermes-gateway.json",
+        "kind": "python-gateway",
+        "healthKind": "http"
+      }
+    ]
+  },
+  "guest": {
+    "kind": "electron-module",
+    "module": "hermes-desktop",
+    "capabilities": [
+      "fs",
+      "dialog",
+      "pty",
+      "git",
+      "oauth.loopback",
+      "stream"
+    ],
+    "preferStrategy": "electron-module"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "id": "hermes.open",
+        "title": "Hermes Agent"
+      }
+    ],
+    "panels": [
+      {
+        "id": "hermes.main",
+        "title": "Hermes Agent"
+      }
+    ]
+  }
+}
