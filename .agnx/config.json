@@ -1,0 +1,10 @@
+{
+  "appId": "hermes-agent",
+  "installState": "installed",
+  "launchMode": "packaged",
+  "source": {
+    "kind": "github",
+    "url": "https://github.com/NousResearch/hermes-agent"
+  },
+  "updatedAt": "2026-09-25T03:17:55.922Z"
+}
